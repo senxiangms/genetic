@@ -1,6 +1,8 @@
 # genetic
 
 git clone https://github.com/senxiangms/genetic.git
+cd genetic
+pip install -r requirements.txt
 
 #start backend http api service
 
@@ -23,3 +25,23 @@ cd front_end\assistant
 npm start
 
 #open http://localhost:3000/, check some symtoms, click Diagnose. then you will see top possbile diseases
+
+#######################################################################################
+#train a multiclass classifier, and do scoring
+#####################################################################################
+1. preprocess raw data
+
+python djservice\libs\multi_class.py --input orphadata.org_data_xml_en_product4.xml --output .\
+
+#you will get disease_signals_map.json in .\
+
+2. run trainer for at least 10 epochs
+
+python djservice\libs\ML\train.py --input disease_signals_map.json --output djservice\libs\ML\ckpt\
+
+you will find checkpoints in djservice\libs\ML\ckpt\.model_epoch_10.pt
+
+
+3. inference test
+
+python djservice\libs\multi_class.py --input orphadata.org_data_xml_en_product4.xml --output .\ --nodump --modelpath .\djservice\libs\ML\ckpt\
