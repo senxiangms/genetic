@@ -10,7 +10,7 @@ python manage.py runserver
 
 #open http://localhost:8000/classify/diagnose to test diagnose API interface through browser. 
 
-#here is one test case to fill in content textbox.
+#here is one test case to fill in content textbox: {"hpo_ids": [64, 67]}
 
 #You will get top 10 disorder Ids and ranking score in json format.
 like :
