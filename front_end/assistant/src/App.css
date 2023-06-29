@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.text-area {
+  resize: none;
+  overflow: hidden;
+  min-height: 200px;
+  min-width: 500px;
+  float: 
+}
