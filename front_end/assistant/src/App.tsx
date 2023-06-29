@@ -3,9 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import symptom_meta from './symptom_meta.json'
 import disease_meta from './disease_meta.json'
+import { text } from "stream/consumers";
 
 const TextComponent = ({diseases, onChange}) =>{
-  return (<div><textarea  value={diseases} onChange={(e)=>onChange(e)}/></div>)
+  return (<div><textarea  id="outputText" value={diseases} onChange={(e)=>onChange(e)}/></div>)
 };
 
 const CheckboxComponent = ({ list, onChange }) => {
@@ -52,6 +53,7 @@ function App() {
   var disorder_names = []
   const  [diseases, setDiseases] = useState(disorder_names)
   const handleOnChangeOutput = (event) =>{
+      console.log("handleonChangeoutput")
       setDiseases(diseases)
   };
     const diagnoseClick =  (event) => {
@@ -61,12 +63,22 @@ function App() {
       
       var body_str = "{\"hpo_ids\":" + JSON.stringify(selected, null, 4) + "}"
       console.log(body_str);
-      var idScores = []
+      //var idScores = []
+      
       fetch('http://127.0.0.1:8000/classify/diagnose', 
         { method: 'POST', headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}, body: body_str})
           .then(response => response.json())
-          .then(data => {data['disorder_ids'].forEach(x => {diseases.push(disease_meta[x[0]]); console.log(diseases );})})
-    }
+          .then(data => {
+            var outtext = "" 
+            data['disorder_ids'].forEach(x => {
+              diseases.push(disease_meta[x[0]]+"\n"); 
+              outtext = outtext + "\n " + disease_meta[x[0]]
+              })
+            var textarea_elm = document.getElementById("outputText"); 
+            textarea_elm.innerHTML = outtext
+            })
+      }
+
   return (
     <div className="App">
       <header className="App-header">
