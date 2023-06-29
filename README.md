@@ -4,6 +4,7 @@ git clone https://github.com/senxiangms/genetic.git
 
 #start backend http api service
 cd djservice
+
 python manage.py runserver
 
 #open http://localhost:8000/classify/diagnose to test diagnose API interface through browser. 
