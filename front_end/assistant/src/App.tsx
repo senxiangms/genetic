@@ -6,7 +6,7 @@ import disease_meta from './disease_meta.json'
 import { text } from "stream/consumers";
 
 const TextComponent = ({diseases, onChange}) =>{
-  return (<div><textarea  id="outputText" value={diseases} onChange={(e)=>onChange(e)}/></div>)
+  return (<div><textarea  className="text-area" id="outputText" value={diseases} onChange={(e)=>onChange(e)}/></div>)
 };
 
 const CheckboxComponent = ({ list, onChange }) => {
