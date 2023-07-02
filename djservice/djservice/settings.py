@@ -19,7 +19,6 @@ logging.getLogger().setLevel(logging.INFO)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from libs.multi_class import prepare_data
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -42,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework', 
+    'rest_framework',
+    'classify', 
     'corsheaders',
 ]
 
@@ -130,12 +130,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if os.name == 'nt':
-    xml_file = "..\\orphadata.org_data_xml_en_product4.xml"
-else:
-    xml_file = "../orphadata.org_data_xml_en_product4.xml"
-logging.info(f'loading {xml_file}')
-DISEASES, _, _, _ = prepare_data(xml_file)
 CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
         'http://127.0.0.1:3000',

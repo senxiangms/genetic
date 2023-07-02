@@ -8,8 +8,11 @@ import math
 import os
 import json
 import sys
-
 import torch
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+sys.path.insert(0, currentdir) 
 
 from ML.model import MultiClassClassifier, input_size, hidden_size, num_classes
 import numpy as np
