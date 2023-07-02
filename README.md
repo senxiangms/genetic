@@ -41,13 +41,13 @@ open http://localhost:3000/, check some symtoms, click Diagnose. then you will s
 
 python djservice\libs\multi_class.py --input orphadata.org_data_xml_en_product4.xml --output .\
 
-#you will get disease_signals_map.json in .\
+#you will get disease_signals_map.json in .\, dumpping disease_signals_map.json is slow. plz be patient
 
 2. run trainer for at least 10 epochs
 
 python djservice\libs\ML\train.py --input disease_signals_map.json --output djservice\libs\ML\ckpt\
 
-you will find checkpoints in djservice\libs\ML\ckpt\.model_epoch_10.pt
+you will find checkpoints in djservice\libs\ML\ckpt\model_epoch_10.pt
 
 
 3. inference test
