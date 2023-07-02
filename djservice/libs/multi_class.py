@@ -110,7 +110,7 @@ if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser(prog="mult_class", description="multi-class classification trainer", epilog="")
     arg_parser.add_argument("-i", "--input", required=True)
     arg_parser.add_argument("-o", "--output", required=True)
-    arg_parser.add_argument("-n", "--nodump", type = bool, required=False, default=True, action=argparse.BooleanOptionalAction)
+    arg_parser.add_argument("-n", "--nodump", type = bool, required=False, default=False, action=argparse.BooleanOptionalAction)
     arg_parser.add_argument("-m", "--modelpath", required=False, default="")
     args = arg_parser.parse_args()
     logging.getLogger().setLevel(logging.INFO)
@@ -121,7 +121,7 @@ if __name__ == "__main__":
             json.dump(disease_symptom_map, f, indent = 4 )
         #for training
         with open(args.output + DIR_SLASH + "disease_signals_map.json", "w") as f:
-            json.dump(disease_signals_map, f, indent = 4 )
+            json.dump(disease_signals_map, f, indent = 1 )
         #for UI
         with open(args.output + DIR_SLASH + "disease_meta.json", "w") as f:
             json.dump(disease_meta, f, indent = 4 )
@@ -130,6 +130,6 @@ if __name__ == "__main__":
     
     ret = select_ranking(disease_symptom_map=disease_symptom_map, hpo_ids=[64, 67], top_k=10)
     logging.info(f'select_ranking test case: [64, 67]\n return {ret}')
-    model, remapping = load_model_from_checkpoint(args.modelpath + "\\.model_epoch_10.pt", args.modelpath+ "\\disease_meta.json")
+    model, remapping = load_model_from_checkpoint(args.modelpath + "\\model_epoch_10.pt", args.modelpath+ "\\disease_meta.json")
     ret = select_ranking2(disease_symptom_map=disease_symptom_map, hpo_ids=[64, 67], top_k=10, model=model, remapping=remapping)
     logging.info(f'select_ranking2 test case: [64, 67]\n return {ret}')
