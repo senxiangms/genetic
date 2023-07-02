@@ -9,6 +9,8 @@ from libs.multi_class import select_ranking
 from django.conf import settings
 # Create your views here.
 from django.http import HttpResponse
+from django.apps import apps
+
 
 def index(requeset):
     return HttpResponse("hi!")
@@ -29,9 +31,9 @@ def diagnose(request):
     for hpo_id in hpo_ids:
         if not isinstance(hpo_id, int):
             return Response({"msg": "hpo_id should be integer"})
-    
-    #print(len(settings.DISEASES))
-    res = select_ranking(settings.DISEASES, hpo_ids, 10)
+        
+    DISEASES = apps.get_app_config("classify").DISEASES
+    res = select_ranking(DISEASES, hpo_ids, 10)
     response = {"disorder_ids": res}
 
     return  HttpResponse(json.dumps(response))
