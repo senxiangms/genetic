@@ -1,7 +1,9 @@
 # genetic
 
 git clone https://github.com/senxiangms/genetic.git
+
 cd genetic
+
 pip install -r requirements.txt
 
 #start backend http api service
